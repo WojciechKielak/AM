@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.squareup.picasso.Picasso
 import wat.pl.Image
 import wat.pl.databinding.RowBinding
 
@@ -26,7 +27,10 @@ class ImageAdapter(private val images: List<Image>,
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.image.setImageResource(images[position].image)
-        holder.title.text = images[position].author
+        Picasso.get()
+            .load(images[position].imageUrl)
+            .fit()
+            .into(holder.image)
+        holder.title.text = images[position].title
     }
 }

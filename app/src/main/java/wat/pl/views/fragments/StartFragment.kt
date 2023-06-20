@@ -30,7 +30,9 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getDataFromApi()
+        if (vm.loadData().isEmpty()) {
+            getDataFromApi()
+        }
         binding.przegladajButton.setOnClickListener {
             vm.setIsFavorite(false)
             findNavController().navigate(R.id.action_startFragment_to_imageListFragment)
@@ -56,7 +58,8 @@ class StartFragment : Fragment() {
                             author = artResponse.artist_title,
                             year = artResponse.date_end,
 //                            image = artResponse.image_id
-                            image = R.drawable.obraz1
+//                            image = R.drawable.obraz1
+                            imageUrl = "https://www.artic.edu/iiif/2/"+artResponse.image_id+"/full/843,/0/default.jpg"
                         )
                         images.add(image)
                     }

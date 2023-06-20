@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import com.squareup.picasso.Picasso
 import wat.pl.Image
 import wat.pl.ImageViewModel
 import wat.pl.databinding.FragmentDetailBinding
+import android.util.Log
 
 class DetailFragment : Fragment() {
 
@@ -44,7 +46,12 @@ class DetailFragment : Fragment() {
 
     private fun bindImageData(image: Image?) {
         image ?: return
-        binding.imageView.setImageResource(image.image)
+//        binding.imageView.setImageResource(image.image)
+        Picasso.get()
+            .load(image.imageUrl)
+            .fit()
+            .into(binding.imageView)
+        Log.d("DetailFragment", "Bind image data: $image")
         binding.title.text = image.title
         binding.author.text = image.author
         binding.year.text = image.year.toString()

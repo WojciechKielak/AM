@@ -6,5 +6,5 @@ data class Image(
     val title: String,
     val author: String,
     val year: Int,
-    @DrawableRes val image: Int
+    val imageUrl: String
 )
