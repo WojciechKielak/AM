@@ -6,21 +6,21 @@ private val image1 =
     Image(
         title = "q",
         author = "w",
-        year = "e",
+        year = 1,
         image = R.drawable.obraz1
     )
 private val image2 =
     Image(
         title = "a",
         author = "s",
-        year = "d",
+        year = 2,
         image = R.drawable.obraz2
     )
 private val image3 =
     Image(
         title = "z",
         author = "x",
-        year = "c",
+        year = 3,
         image = R.drawable.obraz3
     )
 private var data = listOf(image1, image2, image3,image1, image2, image3)
@@ -36,6 +36,9 @@ class ImageViewModel : ViewModel(), Server{
     private var image : Image ?= null
     private var isFavorite = false
 
+    fun saveDataFromApi(data2: List<Image>) {
+        data = data2
+    }
     override fun loadData(): List<Image> {
         return data
     }

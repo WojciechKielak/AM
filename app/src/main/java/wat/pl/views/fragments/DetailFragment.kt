@@ -47,7 +47,7 @@ class DetailFragment : Fragment() {
         binding.imageView.setImageResource(image.image)
         binding.title.text = image.title
         binding.author.text = image.author
-        binding.year.text = image.year
+        binding.year.text = image.year.toString()
         if(vm.loadDataFav().contains(image))binding.favoriteButton.text = "Usuń z Ulubionych"
         else binding.favoriteButton.text = "Dodaj do Ulubionych"
         //if(vm.getIsFavorite()) binding.favoriteButton.text = "Usuń z Ulubionych"
