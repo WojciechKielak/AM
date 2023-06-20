@@ -7,6 +7,6 @@ data class DataResponse (
     val id : Int,
     @SerializedName("title")
     val title : String,
-    @SerializedName("image_id")
-    val image_id : String,
+//    @SerializedName("image_id")
+//    val image_id : String,
         )

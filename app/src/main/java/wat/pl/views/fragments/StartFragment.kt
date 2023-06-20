@@ -29,7 +29,7 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        getDataFromApi()
+        getDataFromApi()
         binding.przegladajButton.setOnClickListener {
             vm.setIsFavorite(false)
 
@@ -48,8 +48,8 @@ class StartFragment : Fragment() {
         val output = ArrayList<ArtResponse>()
         val apiClient = RetrofitClient.client?.create(ApiClient::class.java)
         val call = apiClient?.getArt()
-        call?.enqueue(object : Callback<List<ArtResponse>> {
-            override fun onResponse(call: Call<List<ArtResponse>>, response: Response<List<ArtResponse>>) {
+        call?.enqueue(object : Callback<ArtResponse> {
+            override fun onResponse(call: Call<ArtResponse>, response: Response<ArtResponse>) {
 //                view?.progressBar1?.visibility = View.GONE
                 if (output.isEmpty()) {
 //                    output.addAll(response.body())
@@ -61,9 +61,13 @@ class StartFragment : Fragment() {
                 Toast.makeText(context, "GGGGGGGGGGGG", Toast.LENGTH_LONG).show()
             }
 
-            override fun onFailure(call: Call<List<ArtResponse>>, t: Throwable?) {
-//                view?.progressBar1?.visibility = View.GONE
-                Toast.makeText(context, "Error occured", Toast.LENGTH_LONG).show()
+//            override fun onFailure(call: Call<List<ArtResponse>>, t: Throwable?) {
+////                view?.progressBar1?.visibility = View.GONE
+//                Toast.makeText(context, "Error occured "+ t?.message, Toast.LENGTH_LONG).show()
+//            }
+
+            override fun onFailure(call: Call<ArtResponse>?, t: Throwable?) {
+                Toast.makeText(context, "Error occured "+ t?.message, Toast.LENGTH_LONG).show()
             }
         })
     }

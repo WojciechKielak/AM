@@ -6,6 +6,6 @@ import retrofit2.http.GET
 interface ApiClient {
 
     @GET("/api/v1/artworks")
-    fun getArt(): Call<List<ArtResponse>>
+    fun getArt(): Call<ArtResponse>
 
 }
