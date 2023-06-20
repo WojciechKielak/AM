@@ -54,9 +54,9 @@ class StartFragment : Fragment() {
                     val images = mutableListOf<Image>()
                     for (artResponse in output.data) {
                         val image = Image(
-                            title = artResponse.title,
-                            author = artResponse.artist_title,
-                            year = artResponse.date_end,
+                            title = artResponse.title ?: "Nazwa nieznana",
+                            author = artResponse.artist_title ?: "Autor nieznany",
+                            year = artResponse.date_end.toString() ?: "Rok nieznany",
 //                            image = artResponse.image_id
 //                            image = R.drawable.obraz1
                             imageUrl = "https://www.artic.edu/iiif/2/"+artResponse.image_id+"/full/843,/0/default.jpg"
