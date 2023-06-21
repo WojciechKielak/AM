@@ -31,15 +31,19 @@ class DetailFragment : Fragment() {
         bindImageData(vm.getImage())
         binding.favoriteButton.setOnClickListener {
             if(vm.loadDataFav().contains(vm.getImage())) {
-                vm.removeFromDataFav(vm.getImage()!!)
+//                vm.removeFromDataFav(vm.getImage()!!)
+                vm.deleteImage(vm.getImage()!!)
                 Toast.makeText(requireContext(),"Obraz usunięty z ulubionych",Toast.LENGTH_SHORT)
                     .show()
+                binding.favoriteButton.text = "Dodaj do Ulubionych"
             } else{
-                vm.addToDataFav(vm.getImage()!!)
+//                vm.addToDataFav(vm.getImage()!!)
+                vm.addImage(vm.getImage()!!)
                 Toast.makeText(requireContext(),"Obraz dodany do ulubionych",Toast.LENGTH_SHORT)
                     .show()
+                binding.favoriteButton.text = "Usuń z Ulubionych"
             }
-            bindImageData(vm.getImage())
+//            bindImageData(vm.getImage())
         }
 
     }

@@ -1,18 +1,19 @@
 package wat.pl
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 
 
 @Dao
 abstract class ArtDao {
 
-    @Insert
-    abstract suspend fun insertImage(art: Art)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertImage(art: Image)
 
     @Query("SELECT * FROM image_table")
-    abstract fun getAllImages(): LiveData<List<Art>>
+    abstract fun getAllImages(): LiveData<List<Image>>
+
+    @Delete
+    abstract suspend fun deleteImage(image: Image)
 
 }

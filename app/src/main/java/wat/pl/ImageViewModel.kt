@@ -1,6 +1,7 @@
 package wat.pl
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -37,7 +38,8 @@ private val image3 =
     )
 //private var data = listOf(image1, image2, image3,image1, image2, image3)
 private var data: List<Image> = listOf()
-private var dataFav = listOf(image1, image2)
+//private var dataFav = listOf(image1, image2)
+private var dataFav: List<Image> = listOf()
 
 interface Server{
     fun loadData(): List<Image>
@@ -57,6 +59,7 @@ class ImageViewModel(application: Application): AndroidViewModel(application), S
     }
     override fun loadDataFav(): List<Image> {
         return dataFav
+//        return readAllData.value ?: emptyList()
     }
     fun addToDataFav(image: Image)  {
         if(!dataFav.contains(image)) dataFav += image
@@ -76,19 +79,38 @@ class ImageViewModel(application: Application): AndroidViewModel(application), S
         this.isFavorite = isFavorite
     }
 
-    private val readAllData: LiveData<List<Art>>
+    val readAllData: LiveData<List<Image>>
     private val repository: ArtRepository
 
     init {
-        val userDao = ArtDatabase.getDatabase(application).imageDao()
-        repository = ArtRepository(userDao)
+        val artDao = ArtDatabase.getDatabase(application).imageDao()
+        repository = ArtRepository(artDao)
         readAllData = repository.readAllData
-    }
 
-    fun addImage(art: Art){
+        readAllData.observeForever { images ->
+            images?.let {
+                Log.d("ImageViewModel", "All Images: $images")
+                dataFav = images.toList() // Assign images to dataFav
+            }
+        }
+
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertImage(art)
+            dataFav = repository.readAllData.value?.toList() ?: emptyList()
+            Log.d("ImageViewModeldddddd", "All Images: $dataFav")
         }
     }
 
-}
+    fun addImage(art: Image){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertImage(art)
+//            dataFav = repository.readAllData.value ?: emptyList()
+        }
+    }
+    fun deleteImage(art: Image){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteImage(art)
+//            dataFav = repository.readAllData.value ?: emptyList()
+        }
+    }
+
+    }

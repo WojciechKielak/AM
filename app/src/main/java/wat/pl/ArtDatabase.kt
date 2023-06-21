@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Art::class], version = 1, exportSchema = false)
+@Database(entities = [Image::class], version = 1)
 abstract class ArtDatabase : RoomDatabase() {
 
     abstract fun imageDao(): ArtDao
