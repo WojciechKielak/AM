@@ -1,9 +1,16 @@
 package wat.pl
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 private val image1 =
     Image(
+        id = 1,
         title = "q",
         author = "w",
         year = "1",
@@ -12,6 +19,7 @@ private val image1 =
     )
 private val image2 =
     Image(
+        id = 2,
         title = "a",
         author = "s",
         year = "2",
@@ -20,6 +28,7 @@ private val image2 =
     )
 private val image3 =
     Image(
+        id = 3,
         title = "z",
         author = "x",
         year = "3",
@@ -36,7 +45,7 @@ interface Server{
     //fun addToDataFav()
     //fun removeFromDataFav()
 }
-class ImageViewModel : ViewModel(), Server{
+class ImageViewModel(application: Application): AndroidViewModel(application), Server{
     private var image : Image ?= null
     private var isFavorite = false
 
@@ -67,5 +76,19 @@ class ImageViewModel : ViewModel(), Server{
         this.isFavorite = isFavorite
     }
 
+    private val readAllData: LiveData<List<Art>>
+    private val repository: ArtRepository
+
+    init {
+        val userDao = ArtDatabase.getDatabase(application).imageDao()
+        repository = ArtRepository(userDao)
+        readAllData = repository.readAllData
+    }
+
+    fun addImage(art: Art){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.insertImage(art)
+        }
+    }
 
 }

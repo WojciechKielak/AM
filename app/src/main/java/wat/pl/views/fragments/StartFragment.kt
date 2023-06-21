@@ -54,6 +54,7 @@ class StartFragment : Fragment() {
                     val images = mutableListOf<Image>()
                     for (artResponse in output.data) {
                         val image = Image(
+                            id =artResponse.id,
                             title = artResponse.title ?: "Nazwa nieznana",
                             author = artResponse.artist_title ?: "Autor nieznany",
                             year = artResponse.date_end.toString() ?: "Rok nieznany",

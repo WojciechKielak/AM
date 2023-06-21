@@ -3,9 +3,9 @@ package wat.pl
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "tabelka")
+@Entity(tableName = "image_table")
 data class Art(
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate = false)
     var id: Int? = null,
     val title: String,
     val author: String,
