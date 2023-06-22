@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
 import wat.pl.Image
+import wat.pl.R
 import wat.pl.databinding.RowBinding
 
 class ImageAdapter(private val images: List<Image>,
@@ -30,6 +31,7 @@ class ImageAdapter(private val images: List<Image>,
         Picasso.get()
             .load(images[position].imageUrl)
             .fit()
+            .error(R.drawable.obraz1)
             .into(holder.image)
         holder.title.text = images[position].title
     }

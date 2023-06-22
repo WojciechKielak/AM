@@ -18,6 +18,7 @@ import wat.pl.Image
 import wat.pl.ImageViewModel
 import wat.pl.databinding.FragmentDetailBinding
 import android.util.Log
+import wat.pl.R
 import java.lang.System.currentTimeMillis
 
 class DetailFragment : Fragment(), SensorEventListener {
@@ -71,6 +72,7 @@ class DetailFragment : Fragment(), SensorEventListener {
         Picasso.get()
             .load(image.imageUrl)
             .fit()
+            .error(R.drawable.obraz1)
             .into(binding.imageView)
         Log.d("DetailFragment", "Bind image data: $image")
         binding.title.text = image.title

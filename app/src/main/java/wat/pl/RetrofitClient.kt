@@ -14,7 +14,7 @@ object RetrofitClient {
             interceptor.level = HttpLoggingInterceptor.Level.BODY
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
             retrofit = Retrofit.Builder()
-                .baseUrl("https://api.artic.edu/") //!!
+                .baseUrl(URL_base)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

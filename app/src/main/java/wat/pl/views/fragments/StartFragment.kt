@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
@@ -59,19 +58,17 @@ class StartFragment : Fragment() {
                 if (output != null) {
                     val images = mutableListOf<Image>()
                     for (artResponse in output.data) {
+//                        if(artResponse.image_id == null)continue
                         val image = Image(
                             id =artResponse.id ?: 0 ,
                             title = artResponse.title ?: "Nazwa nieznana",
                             author = artResponse.artist_title ?: "Autor nieznany",
                             year = artResponse.date_end.toString() ?: "Rok nieznany",
-//                            image = artResponse.image_id
-//                            image = R.drawable.obraz1
-                            imageUrl = "https://www.artic.edu/iiif/2/"+artResponse.image_id+"/full/843,/0/default.jpg"
+                            imageUrl = URL_obraz_cz1 +artResponse.image_id+ URL_obraz_cz2
                         )
                         images.add(image)
                     }
                     vm.saveDataFromApi(images)
-//                    Toast.makeText(context, "GGGGGGGGGGGG $output", Toast.LENGTH_LONG).show()
                     binding.przegladajButton.isEnabled = true
                 }
                 binding.progressBar.visibility = GONE
@@ -79,7 +76,7 @@ class StartFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<ArtResponse>, t: Throwable) {
-                Toast.makeText(context, "Error occurred: ${t.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Nieudane połączenie z api!", Toast.LENGTH_LONG).show()
                 binding.progressBar.visibility = GONE
                 binding.ulubioneButton.isEnabled = true
             }

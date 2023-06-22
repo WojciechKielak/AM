@@ -4,8 +4,7 @@ import retrofit2.Call
 import retrofit2.http.GET
 
 interface ApiClient {
-
-    @GET("/api/v1/artworks")
+    @GET(URL_continue)
     fun getArt(): Call<ArtResponse>
 
 }

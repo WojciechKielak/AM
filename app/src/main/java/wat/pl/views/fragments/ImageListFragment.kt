@@ -32,10 +32,10 @@ class ImageListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (vm.getIsFavorite()){
             img = vm.loadDataFav()
-            binding.listaPodpis.text = "Wybierz obraz z ulubionych"
+            binding.listaPodpis.text = "Wybierz dzieło sztuki z ulubionych"
         }else{
             img = vm.loadData()
-            binding.listaPodpis.text = "Wybierz obraz"
+            binding.listaPodpis.text = "Wybierz dzieło sztuki"
         }
         val adapter = ImageAdapter(
             images = img!!,
