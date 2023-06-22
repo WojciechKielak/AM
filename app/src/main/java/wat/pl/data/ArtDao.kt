@@ -1,4 +1,4 @@
-package wat.pl
+package wat.pl.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

@@ -1,10 +1,10 @@
-package wat.pl
+package wat.pl.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "image_table")
-data class Art(
+data class Image(
     @PrimaryKey(autoGenerate = false)
     var id: Int? = null,
     val title: String,

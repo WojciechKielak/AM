@@ -1,9 +1,10 @@
-package wat.pl
+package wat.pl.remote
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import wat.pl.URL_base
 
 object RetrofitClient {
 

@@ -1,4 +1,4 @@
-package wat.pl
+package wat.pl.data
 
 import android.content.Context
 import androidx.room.Database
@@ -15,12 +15,12 @@ abstract class ArtDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: ArtDatabase? = null
 
-        fun getDatabase(context: Context): ArtDatabase{
+        fun getDatabase(context: Context): ArtDatabase {
             val tempInstance = INSTANCE
-            if(tempInstance != null){
+            if (tempInstance != null) {
                 return tempInstance
             }
-            synchronized(this){
+            synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     ArtDatabase::class.java,

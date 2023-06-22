@@ -1,23 +1,30 @@
 package wat.pl.views.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import wat.pl.*
-import wat.pl.databinding.FragmentStartBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import wat.pl.ImageViewModel
+import wat.pl.R
+import wat.pl.URL_obraz_cz1
+import wat.pl.URL_obraz_cz2
+import wat.pl.data.Image
+import wat.pl.databinding.FragmentStartBinding
+import wat.pl.remote.ApiClient
+import wat.pl.remote.ArtResponse
+import wat.pl.remote.RetrofitClient
 
 class StartFragment : Fragment() {
 
-    private val vm by activityViewModels<ImageViewModel> ()
+    private val vm by activityViewModels<ImageViewModel>()
     private var _binding: FragmentStartBinding? = null
     private val binding get() = _binding!!
 
@@ -33,7 +40,7 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (vm.loadData().isEmpty()) {
             getDataFromApi()
-        }else {
+        } else {
             binding.progressBar.visibility = GONE
             binding.przegladajButton.isEnabled = true
             binding.ulubioneButton.isEnabled = true
@@ -49,7 +56,6 @@ class StartFragment : Fragment() {
     }
 
     private fun getDataFromApi() {
-        System.out.println("Pobieramy dane z API.")
         val apiClient = RetrofitClient.client?.create(ApiClient::class.java)
         val call = apiClient?.getArt()
         call?.enqueue(object : Callback<ArtResponse> {
@@ -58,13 +64,12 @@ class StartFragment : Fragment() {
                 if (output != null) {
                     val images = mutableListOf<Image>()
                     for (artResponse in output.data) {
-//                        if(artResponse.image_id == null)continue
                         val image = Image(
-                            id =artResponse.id ?: 0 ,
+                            id = artResponse.id ?: 0,
                             title = artResponse.title ?: "Nazwa nieznana",
                             author = artResponse.artist_title ?: "Autor nieznany",
                             year = artResponse.date_end.toString() ?: "Rok nieznany",
-                            imageUrl = URL_obraz_cz1 +artResponse.image_id+ URL_obraz_cz2
+                            imageUrl = URL_obraz_cz1 + artResponse.image_id + URL_obraz_cz2
                         )
                         images.add(image)
                     }

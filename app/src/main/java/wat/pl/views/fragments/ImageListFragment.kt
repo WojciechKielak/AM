@@ -1,39 +1,39 @@
 package wat.pl.views.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import wat.pl.Image
-import wat.pl.adapters.ImageAdapter
 import wat.pl.ImageViewModel
 import wat.pl.R
+import wat.pl.adapters.ImageAdapter
+import wat.pl.data.Image
 import wat.pl.databinding.FragmentImageListBinding
 
 class ImageListFragment : Fragment() {
 
-    private val vm by activityViewModels<ImageViewModel> ()
-    private var _binding : FragmentImageListBinding?= null
+    private val vm by activityViewModels<ImageViewModel>()
+    private var _binding: FragmentImageListBinding? = null
     private val binding get() = _binding!!
-    private var img: List<Image> ?= null
+    private var img: List<Image>? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentImageListBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentImageListBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (vm.getIsFavorite()){
+        if (vm.getIsFavorite()) {
             img = vm.loadDataFav()
             binding.listaPodpis.text = "Wybierz dzieło sztuki z ulubionych"
-        }else{
+        } else {
             img = vm.loadData()
             binding.listaPodpis.text = "Wybierz dzieło sztuki"
         }
@@ -44,7 +44,6 @@ class ImageListFragment : Fragment() {
                 findNavController().navigate(R.id.action_imageListFragment_to_detailFragment)
             }
         )
-
         binding.recycleView.layoutManager = LinearLayoutManager(requireContext())
         binding.recycleView.adapter = adapter
     }

@@ -1,16 +1,16 @@
-package wat.pl
+package wat.pl.remote
 
 import com.google.gson.annotations.SerializedName
 
-data class DataResponse (
+data class DataResponse(
     @SerializedName("id")
-    val id : Int,
+    val id: Int,
     @SerializedName("title")
-    val title : String,
+    val title: String,
     @SerializedName("image_id")
-    val image_id : String,
+    val image_id: String,
     @SerializedName("date_end")
-    val date_end : Int,
+    val date_end: Int,
     @SerializedName("artist_title")
-    val artist_title : String,
-        )
+    val artist_title: String,
+)
