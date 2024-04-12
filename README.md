@@ -1,5 +1,6 @@
 # Aplikacja z dziełami sztuki
 Aplikacja do przeglądania dzieł sztuki udostępniane przez api z Art Institute of Chicago. Możliwe jest dodanie dzieł sztuki do ulubionych, za pomocą przycisku lub potrząśnięcia telefonem. Napisana w języku Kotlin.
+
 Uruchomienie aplikacji:
 
 ![image](https://github.com/WojciechKielak/AM/assets/120566154/14fb7203-9029-4ed8-bc96-0af2a72764cd)
